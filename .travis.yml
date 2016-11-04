@@ -1,13 +1,25 @@
 language: cpp
 
+sudo: required
+dist: trusty
+
 compiler:
   - clang
   - gcc
 
-install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-5.2"; fi
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.8"; fi
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.8
+    packages:
+    - gcc-5
+    - g++-5
+    - clang-3.8
 
+install:
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
+    - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.8" CC="clang-3.8"; fi
 
 before_script:
   - mkdir build
@@ -15,14 +27,6 @@ before_script:
   - cmake ..
 script:
   - make
-  - cd ../bin
-  - ./Test
+  - ./main
 
-addons:
-    apt:
-        sources:
-            - llvm-toolchain-precise
-            - ubuntu-toolchain-r-test
-        packages:
-            - clang-3.8
-            - g++-5.2
+
