@@ -4,6 +4,11 @@ compiler:
   - clang
   - gcc
 
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-5.2"; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.8"; fi
+
+
 before_script:
   - mkdir build
   - cd build
@@ -20,4 +25,4 @@ addons:
             - ubuntu-toolchain-r-test
         packages:
             - clang-3.8
-            - g++-6
+            - g++-5.2
