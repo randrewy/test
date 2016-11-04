@@ -1,6 +1,23 @@
-language: C++
+language: cpp
 
 compiler:
   - clang
   - gcc
 
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
+script:
+  - make
+  - cd ../bin
+  - ./Test
+
+addons:
+    apt:
+        sources:
+            - llvm-toolchain-precise
+            - ubuntu-toolchain-r-test
+        packages:
+            - clang-3.8
+            - g++-6
