@@ -28,5 +28,6 @@ before_script:
 script:
   - make
   - ./main
+  - ctest -VV
 
 
